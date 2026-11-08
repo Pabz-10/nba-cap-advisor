@@ -19,7 +19,7 @@ Full design is in docs/design_doc.md. The official brief is in docs/procogia_bri
 - RAG over the 2023 NBA CBA (Chroma, local open-source embeddings) plus a league-wide
   contracts table (SQLite) queried by fixed, tested functions.
 - A trade is checked on both sides by calling the same function per team.
-- LLM: Gemini via Google AI Studio free tier (no billing, rate limits, backoff needed).
+- LLM: Gemini via Google AI Studio 10 dollar prepaid limit.
 - Framework: LangGraph. Python.
 
 ## Architecture
