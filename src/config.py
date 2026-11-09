@@ -9,3 +9,5 @@ MAX_CHUNK_TOKENS = 230  # MiniLM reads 256 tokens; leaves room for special token
 
 VECTORSTORE_DIR = ROOT / "vectorstore"
 COLLECTION_NAME = "cba_2023"
+
+TOP_K = 5
