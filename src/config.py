@@ -11,3 +11,4 @@ VECTORSTORE_DIR = ROOT / "vectorstore"
 COLLECTION_NAME = "cba_2023"
 
 TOP_K = 5
+SIMILARITY_THRESHOLD = 0.55  # starting guess, the eval sets the final number
