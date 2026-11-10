@@ -16,6 +16,10 @@ TAX_LINE = 200_428_000
 FIRST_APRON = 209_015_000
 SECOND_APRON = 221_686_000
 
+# salary matching in trades (CBA Art VII, Section 6(j))
+TRADE_ALLOWANCE = 250_000  # the "+ $250,000" in 6(j)(1); drops to $0 over the first apron, 6(j)(3)
+EXPANDED_TPE_AMOUNT = 9_095_709  # $7.5M x (2026-27 cap / 2023-24 cap of $136,021,000), 6(j)(1)(iv)
+
 CBA_VERSION = "2023"
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 MAX_CHUNK_TOKENS = 230  # MiniLM reads 256 tokens; leaves room for special tokens
