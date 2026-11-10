@@ -9,6 +9,13 @@ CONTRACTS_CSV_PATH = PROCESSED_DIR / "contracts.csv"
 CONTRACTS_DB_PATH = PROCESSED_DIR / "contracts.db"
 CONTRACTS_AS_OF = "2026-11-05"  # date we received the Basketball Reference file
 
+# official 2026-27 figures (pr.nba.com)
+SALARY_CAP = 164_961_000
+MINIMUM_TEAM_SALARY = 148_465_000
+TAX_LINE = 200_428_000
+FIRST_APRON = 209_015_000
+SECOND_APRON = 221_686_000
+
 CBA_VERSION = "2023"
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 MAX_CHUNK_TOKENS = 230  # MiniLM reads 256 tokens; leaves room for special tokens
