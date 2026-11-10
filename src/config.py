@@ -3,6 +3,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CBA_PDF_PATH = ROOT / "data" / "raw" / "NBA_CBA.pdf"
 
+CONTRACTS_RAW_PATH = ROOT / "data" / "raw" / "NBA_Player_Salaries.csv"
+PROCESSED_DIR = ROOT / "data" / "processed"
+CONTRACTS_CSV_PATH = PROCESSED_DIR / "contracts.csv"
+CONTRACTS_DB_PATH = PROCESSED_DIR / "contracts.db"
+CONTRACTS_AS_OF = "2026-11-05"  # date we received the Basketball Reference file
+
 CBA_VERSION = "2023"
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 MAX_CHUNK_TOKENS = 230  # MiniLM reads 256 tokens; leaves room for special tokens
