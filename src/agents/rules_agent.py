@@ -53,7 +53,7 @@ def run_rules_agent(query: str, top_k: int = TOP_K, tier: str | None = None):
     second = search_and_check(new_query, top_k, tier)
 
     # 5. if it still fails, abstain: send no chunks onward
-    if not second["passed"]:
+    if second["passed"] == False:
         second["chunks"] = []
 
     second["rewritten_query"] = new_query
