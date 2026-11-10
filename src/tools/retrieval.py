@@ -20,7 +20,7 @@ def get_model():
 
 
 
-def search_cba(query: str, top_k: int = TOP_K, tier: str | None = None) -> list[dict]:
+def search_cba(query: str, top_k: int = TOP_K, tier: str | None = None):
     """Return the top_k closest chunks, best first."""
 
     # embed the query, the same way the chunks were embedded
@@ -34,7 +34,7 @@ def search_cba(query: str, top_k: int = TOP_K, tier: str | None = None) -> list[
     else:
         where = None
 
-    res = collection.query(query_embeddings=query_embeddings, n_results=top_k, where=where )
+    res = collection.query(query_embeddings=query_embeddings, n_results=top_k, where=where)
     
 
     #  return a list of {"id", "text", "citation", "pages", "tier", "score"}

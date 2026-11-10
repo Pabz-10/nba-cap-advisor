@@ -12,3 +12,9 @@ COLLECTION_NAME = "cba_2023"
 
 TOP_K = 5
 SIMILARITY_THRESHOLD = 0.55  # starting guess, the eval sets the final number
+
+REWRITE_MODEL = "models/gemini-3.5-flash-lite"
+COMPOSER_MODEL = "models/gemini-3.8-flash"
+VERIFIER_MODEL = "models/gemini-3.8-flash"
+LLM_TIMEOUT_SECONDS = 30
+LLM_MAX_ATTEMPTS = 3

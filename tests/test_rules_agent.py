@@ -1,4 +1,5 @@
-from src.agents.rules_agent import search_and_check
+from src.agents import rules_agent
+from src.agents.rules_agent import search_and_check, run_rules_agent
 
 ROOKIE_QUESTION = "How long after signing can a draft rookie be traded?"
 PIZZA_QUESTION = "What is the best pizza topping in Toronto?"
@@ -45,3 +46,81 @@ def test_threshold_cannot_catch_on_topic_unanswerable_questions():
     result = search_and_check(OLD_CAP_QUESTION)
 
     assert result["passed"] is True
+
+
+# Fake rewrites so these tests don't call Gemini (free, same result every run).
+
+def fake_rewrite_that_breaks(query):
+    raise TimeoutError("pretend Gemini timed out")
+
+
+def fake_rewrite_to_rookie_question(query):
+    return ROOKIE_QUESTION
+
+
+def fake_rewrite_to_pizza_question(query):
+    return PIZZA_QUESTION
+
+
+def test_strong_question_skips_the_rewrite(monkeypatch):
+    # If the rewrite ran, the fake would break it and the agent would abstain.
+    monkeypatch.setattr(rules_agent, "rewrite_query", fake_rewrite_that_breaks)
+
+    result = run_rules_agent(ROOKIE_QUESTION)
+
+    assert result["passed"] is True
+    assert result["rewritten_query"] is None
+
+
+def test_weak_question_is_saved_by_a_good_rewrite(monkeypatch):
+    monkeypatch.setattr(rules_agent, "rewrite_query", fake_rewrite_to_rookie_question)
+
+    result = run_rules_agent(PIZZA_QUESTION)
+
+    assert result["passed"] is True
+    assert result["rewritten_query"] == ROOKIE_QUESTION
+    assert len(result["chunks"]) == 5
+
+
+def test_rewrite_that_still_fails_abstains(monkeypatch):
+    monkeypatch.setattr(rules_agent, "rewrite_query", fake_rewrite_to_pizza_question)
+
+    result = run_rules_agent(PIZZA_QUESTION)
+
+    assert result["passed"] is False
+    assert result["chunks"] == []
+
+
+def test_gemini_error_fails_closed(monkeypatch):
+    monkeypatch.setattr(rules_agent, "rewrite_query", fake_rewrite_that_breaks)
+
+    result = run_rules_agent(PIZZA_QUESTION)
+
+    assert result["passed"] is False
+    assert result["chunks"] == []
+    assert result["rewritten_query"] is None
+    assert result["best_score"] < 0.55
+
+
+def test_retry_keeps_top_k_and_tier(monkeypatch):
+    monkeypatch.setattr(rules_agent, "rewrite_query", fake_rewrite_to_rookie_question)
+
+    result = run_rules_agent(PIZZA_QUESTION, top_k=3, tier="core")
+
+    assert len(result["chunks"]) == 3
+    for chunk in result["chunks"]:
+        assert chunk["tier"] == "core"
+
+
+def test_rewrite_is_given_the_question_text(monkeypatch):
+    questions_sent = []
+
+    def fake_rewrite_that_records(query):
+        questions_sent.append(query)
+        return ROOKIE_QUESTION
+
+    monkeypatch.setattr(rules_agent, "rewrite_query", fake_rewrite_that_records)
+
+    run_rules_agent(PIZZA_QUESTION)
+
+    assert questions_sent == [PIZZA_QUESTION]
