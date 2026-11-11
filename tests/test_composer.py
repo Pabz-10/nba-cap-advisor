@@ -263,3 +263,32 @@ def test_gemini_failure_has_no_evidence(monkeypatch):
     use_fake_model(monkeypatch, BrokenModel())
 
     assert compose_answer("trade?", None, TRADE_DATA)["evidence"] == ""
+
+
+# Retrying after the verifier rejects an answer.
+
+def test_feedback_is_sent_to_the_model(monkeypatch):
+    model = RecordingModel("Fixed.")
+    use_fake_model(monkeypatch, model)
+
+    compose_answer("trade?", None, TRADE_DATA, "number not in evidence")
+
+    assert "Fix this problem: number not in evidence" in model.prompt
+
+
+def test_first_attempt_has_no_feedback_section(monkeypatch):
+    model = RecordingModel("Answer.")
+    use_fake_model(monkeypatch, model)
+
+    compose_answer("trade?", None, TRADE_DATA)
+
+    assert "rejected" not in model.prompt
+
+
+def test_feedback_never_becomes_evidence(monkeypatch):
+    # If it did, a bad number from the rejected answer would count as allowed on the retry.
+    use_fake_model(monkeypatch, RecordingModel("Fixed."))
+
+    result = compose_answer("trade?", None, TRADE_DATA, "Your answer was: $19,500")
+
+    assert "Your answer was" not in result["evidence"]

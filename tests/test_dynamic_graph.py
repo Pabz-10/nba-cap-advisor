@@ -22,7 +22,7 @@ def fake_agents(monkeypatch, verdicts):
     monkeypatch.setattr(
         workflows,
         "compose_answer",
-        lambda q, r, d: {"answer": "a draft", "abstained": False, "sources": [], "evidence": ""},
+        lambda q, r, d, f: {"answer": "a draft", "abstained": False, "sources": [], "evidence": ""},
     )
     monkeypatch.setattr(workflows, "verify_answer", lambda q, c: {"passed": remaining.pop(0), "reason": "test"})
 

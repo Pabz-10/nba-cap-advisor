@@ -104,7 +104,12 @@ def compose_node(state):
     rules_result = state["rules_result"]
     data_result = state["data_result"]
 
-    res = compose_answer(question, rules_result, data_result)
+    # on a retry, pass along why the last answer failed and what it said
+    feedback = None
+    if state["revise_count"] > 0:
+        feedback = state["verdict"]["reason"] + ". Your answer was: " + state["composed"]["answer"]
+
+    res = compose_answer(question, rules_result, data_result, feedback)
 
     return {
         "composed": res,

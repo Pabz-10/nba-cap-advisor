@@ -68,7 +68,7 @@ def format_data(data_result):
 
 
 
-def compose_answer(question, rules_result=None, data_result=None):
+def compose_answer(question, rules_result=None, data_result=None, feedback=None):
     """Answer using the retrieved CBA chunks and the data agent's numbers, with citations."""
     has_rules = rules_result is not None and rules_result["passed"]
     has_data = data_result is not None and data_result["error"] is None
@@ -104,7 +104,12 @@ CBA sections:
     if has_data:
         data_text = "\n\nTeam numbers:\n" + format_data(data_result)
 
-    prompt = instructions + format_chunks(chunks) + data_text + "\n\nQuestion: " + question
+    # on a retry, tell the model what was wrong with its last answer
+    feedback_text = ""
+    if feedback:
+        feedback_text = "\n\nYour last answer was rejected. Fix this problem: " + feedback
+
+    prompt = instructions + format_chunks(chunks) + data_text + feedback_text + "\n\nQuestion: " + question
 
     # send it to the composer model, fail closed if it errors
     try:

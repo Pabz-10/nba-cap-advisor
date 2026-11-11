@@ -70,8 +70,8 @@ def test_data_node_checks_the_trade():
 def test_compose_node_reads_the_results_from_state(monkeypatch):
     calls = []
 
-    def fake_compose(question, rules_result, data_result):
-        calls.append((question, rules_result, data_result))
+    def fake_compose(question, rules_result, data_result, feedback):
+        calls.append((question, rules_result, data_result, feedback))
         return {"answer": "hi"}
 
     monkeypatch.setattr(workflows, "compose_answer", fake_compose)
@@ -79,7 +79,7 @@ def test_compose_node_reads_the_results_from_state(monkeypatch):
 
     update = compose_node(state)
 
-    assert calls == [("q", "the rules", "the data")]
+    assert calls == [("q", "the rules", "the data", None)]
     assert update == {"composed": {"answer": "hi"}, "steps": ["route", "compose"]}
 
 
@@ -99,3 +99,23 @@ def test_abstain_node_replaces_the_answer():
 
     assert update["composed"] == {"answer": NOT_FOUND, "abstained": True, "sources": [], "evidence": ""}
     assert update["steps"] == ["verify", "abstain"]
+
+
+def test_compose_node_passes_feedback_on_a_retry(monkeypatch):
+    calls = []
+
+    def fake_compose(question, rules_result, data_result, feedback):
+        calls.append(feedback)
+        return {"answer": "better"}
+
+    monkeypatch.setattr(workflows, "compose_answer", fake_compose)
+    state = dict(
+        new_state("q"),
+        revise_count=1,
+        verdict={"passed": False, "reason": "number not in evidence"},
+        composed={"answer": "Max is $19,500."},
+    )
+
+    compose_node(state)
+
+    assert calls == ["number not in evidence. Your answer was: Max is $19,500."]
