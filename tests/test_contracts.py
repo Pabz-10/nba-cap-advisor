@@ -63,3 +63,15 @@ def test_as_of_date_is_stored():
     rows = query("SELECT value FROM meta WHERE key = 'as_of'")
 
     assert rows == [("2026-11-05",)]
+
+
+def test_no_player_name_is_still_damaged():
+    rows = query("SELECT player FROM contracts WHERE player LIKE '%?%'")
+
+    assert rows == []
+
+
+def test_damaged_names_are_repaired():
+    rows = query("SELECT player FROM contracts WHERE player_id = 'jokicni01'")
+
+    assert rows == [("Nikola Jokic",)]

@@ -50,6 +50,15 @@ def get_player(player_id):
     return {"player_id": player_id, "player": player, "team": team, "salary": salary}
 
 
+def get_all_players():
+    """List every player's ID, name and team."""
+    con = sqlite3.connect(CONTRACTS_DB_PATH)
+    rows = con.execute("SELECT player_id, player, team FROM contracts").fetchall()
+    con.close()
+
+    return [{"player_id": row[0], "player": row[1], "team": row[2]} for row in rows]
+
+
 def get_apron_status(payroll):
     """Say where a payroll sits against the 2026-27 cap, tax line and aprons."""
     # how far the payroll is below each line (negative means it's already over)

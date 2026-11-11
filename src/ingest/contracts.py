@@ -23,6 +23,24 @@ EXPECTED_HEADER = ["Rk", "Player", "Tm"] + SEASONS + ["Guaranteed", "-9999"]
 SALARY_COLUMNS = ["salary_" + season.replace("-", "_") for season in SEASONS]
 COLUMNS = ["player_id", "player", "team"] + SALARY_COLUMNS + ["guaranteed"]
 
+# 13 names lost a letter in the raw file (it became "?"), so it can't be decoded back.
+# Plain spellings, so the names match what people type.
+NAME_FIXES = {
+    "bogdabo01": "Bogdan Bogdanovic",
+    "doncilu01": "Luka Doncic",
+    "jakucka01": "Kasparas Jakucionis",
+    "jokicni01": "Nikola Jokic",
+    "jovicni01": "Nikola Jovic",
+    "krejcvi01": "Vit Krejci",
+    "matkoka01": "Karlo Matkovic",
+    "micicva01": "Vasilije Micic",
+    "nurkiju01": "Jusuf Nurkic",
+    "porzikr01": "Kristaps Porzingis",
+    "sengual01": "Alperen Sengun",
+    "topicni01": "Nikola Topic",
+    "vucevni01": "Nikola Vucevic",
+}
+
 
 def read_raw_rows(path):
     """Read the raw file into lists of values, one list per player row."""
@@ -54,6 +72,9 @@ def clean_row(values):
     player, team = values[1], values[2]
     salaries = values[3:9]
     guaranteed, player_id = values[9], values[10]
+
+    # use the repaired spelling if this name was damaged in the raw file
+    player = NAME_FIXES.get(player_id, player)
 
     row = {"player_id": player_id, "player": player, "team": team}
     for column, value in zip(SALARY_COLUMNS, salaries):
