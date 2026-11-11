@@ -101,3 +101,17 @@ def test_each_step_prints_a_readable_label(capsys):
     cli.show_step("rules")
 
     assert capsys.readouterr().out == "  - Searched the CBA\n"
+
+
+def test_route_is_printed_in_plain_english(capsys):
+    result = {
+        "route": "clarify",
+        "steps": ["route", "rules", "data", "compose", "verify"],
+        "rules_result": None,
+        "verdict": None,
+        "composed": {"answer": "I won't guess."},
+    }
+
+    cli.print_result(result)
+
+    assert "Route: clarify (too vague, needs to ask first)" in capsys.readouterr().out

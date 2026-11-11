@@ -9,6 +9,14 @@ from src.graph.workflows import build_dynamic_graph, build_static_graph, run_wor
 
 PREVIEW_CHARS = 160
 
+# what the router decided the question needs
+ROUTE_LABELS = {
+    "rules": "rules (needs the CBA only)",
+    "data": "data (needs team numbers only)",
+    "both": "both (needs the CBA and team numbers)",
+    "clarify": "clarify (too vague, needs to ask first)",
+}
+
 # what to print as each step finishes
 STEP_LABELS = {
     "route": "Read the question",
@@ -80,7 +88,7 @@ def print_chunks(chunks):
 
 def print_result(result, show_rewrite=False):
     """Print the path the question took, the checks, and the answer."""
-    print(f"Route: {result['route']}")
+    print("Route: " + ROUTE_LABELS.get(result["route"], str(result["route"])))
     print("Steps: " + " -> ".join(result["steps"]))
 
     # the CBA search is skipped on some routes
