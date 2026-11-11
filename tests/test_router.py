@@ -136,6 +136,24 @@ def test_team_numbers_question_goes_to_data():
     assert result["team"] == "TOR"
 
 
+def test_cap_with_a_team_goes_to_data():
+    # this used to fall through to rules because only "cap space" was a data word
+    result = route_question("Are the Nets under the cap?")
+
+    assert result["route"] == "data"
+    assert result["team"] == "BRK"
+
+
+def test_cap_without_a_team_still_goes_to_rules():
+    # "cap" is a data word now, but a numbers question still needs a team
+    assert route_question("What was the salary cap in 1995?")["route"] == "rules"
+
+
+def test_cap_inside_another_word_is_not_a_data_word():
+    # whole words only, so "capital" doesn't count as "cap"
+    assert route_question("Are the Nets in the capital?")["route"] == "rules"
+
+
 def test_general_trade_rule_goes_to_rules_not_clarify():
     result = route_question("Can a team above the second apron aggregate player salaries in a trade?")
 

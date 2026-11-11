@@ -1,0 +1,780 @@
+{
+  "settings": {
+    "mode": "dynamic",
+    "top_k": 8,
+    "tier": null
+  },
+  "summary": {
+    "questions": 25,
+    "correct": "25/25",
+    "route_correct": "25/25",
+    "behavior_correct": "25/25",
+    "retrieval_hit": "6/6",
+    "citation_valid": "17/17",
+    "total_tokens": 67295,
+    "average_seconds": 8.46,
+    "known_gaps_correct": "0/4"
+  },
+  "results": [
+    {
+      "id": "rules_01",
+      "type": "rules",
+      "known_gap": false,
+      "question": "How long after signing can a draft rookie be traded?",
+      "route": "rules",
+      "route_correct": true,
+      "behavior": "answer",
+      "expected_behavior": "answer",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": true,
+      "citation_valid": true,
+      "verdict": {
+        "passed": true,
+        "reason": "ok"
+      },
+      "steps": [
+        "route",
+        "rules",
+        "compose",
+        "verify"
+      ],
+      "tokens": 3442,
+      "seconds": 7.42,
+      "answer": "A Draft Rookie who signs a Standard NBA Contract cannot be traded before thirty (30) days following the date on which the contract is signed [Article VII, Section 8(d)]."
+    },
+    {
+      "id": "rules_02",
+      "type": "rules",
+      "known_gap": false,
+      "question": "How long after signing can a free agent be traded?",
+      "route": "rules",
+      "route_correct": true,
+      "behavior": "answer",
+      "expected_behavior": "answer",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": true,
+      "citation_valid": true,
+      "verdict": {
+        "passed": true,
+        "reason": "ok"
+      },
+      "steps": [
+        "route",
+        "rules",
+        "compose",
+        "verify"
+      ],
+      "tokens": 5268,
+      "seconds": 14.84,
+      "answer": "A player who signs a Standard NBA Contract as a Free Agent generally cannot be traded before the later of:\n* Three (3) months following the date the contract was signed, or \n* The December 15 of the Salary Cap Year in which the contract was signed [Article VII, Section 8(d)(ii)]. \n*(This waiting period does not apply to the initial trade if the contract is signed in connection with an agreement to trade the contract under Section 8(e)) [Article VII, Section 8(d)(ii)].*\n\nHowever, the player cannot be traded before the later of three (3) months following the signing date or January 15 of that Salary Cap Year if all of the following criteria are met:\n* The player re-signs a Standard NBA Contract with their prior Team [Article VII, Section 8(d)(iii)];\n* The team's Team Salary is above the Salary Cap immediately following the signing [Article VII, Section 8(d)(iii)]; and\n* The player is a Qualifying Veteran Free Agent or Early Qualifying Veteran Free Agent who signs for a first-season Salary greater than one hundred twenty percent (120%) of the Salary for the last Season of their immediately prior Contract [Article VII, Section 8(d)(iii)]."
+    },
+    {
+      "id": "rules_03",
+      "type": "rules",
+      "known_gap": false,
+      "question": "How often can a team use the Bi-annual Exception?",
+      "route": "rules",
+      "route_correct": true,
+      "behavior": "answer",
+      "expected_behavior": "answer",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": true,
+      "citation_valid": true,
+      "verdict": {
+        "passed": true,
+        "reason": "ok"
+      },
+      "steps": [
+        "route",
+        "rules",
+        "compose",
+        "verify"
+      ],
+      "tokens": 3497,
+      "seconds": 5.31,
+      "answer": "A team cannot use all or any portion of the Bi-annual Exception in any two (2) consecutive Salary Cap Years [Article VII, Section 6(d)(3)]."
+    },
+    {
+      "id": "rules_04",
+      "type": "rules",
+      "known_gap": false,
+      "question": "How long can a Bi-annual Exception contract be?",
+      "route": "rules",
+      "route_correct": true,
+      "behavior": "answer",
+      "expected_behavior": "answer",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": true,
+      "citation_valid": true,
+      "verdict": {
+        "passed": true,
+        "reason": "ok"
+      },
+      "steps": [
+        "route",
+        "rules",
+        "compose",
+        "verify"
+      ],
+      "tokens": 2970,
+      "seconds": 5.82,
+      "answer": "A Player Contract signed pursuant to the Bi-annual Exception may not exceed two (2) Seasons in length [Article VII, Section 6(d)(2)]. Additionally, the remaining term of a contract acquired by assignment pursuant to the Bi-annual Exception may not exceed two (2) Seasons in length [Article VII, Section 6(d)(2)]."
+    },
+    {
+      "id": "rules_05",
+      "type": "rules",
+      "known_gap": false,
+      "question": "How long can a Non-Taxpayer Mid-Level contract be?",
+      "route": "rules",
+      "route_correct": true,
+      "behavior": "answer",
+      "expected_behavior": "answer",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": true,
+      "citation_valid": true,
+      "verdict": {
+        "passed": true,
+        "reason": "ok"
+      },
+      "steps": [
+        "route",
+        "rules",
+        "compose",
+        "verify"
+      ],
+      "tokens": 3074,
+      "seconds": 7.23,
+      "answer": "A Player Contract signed or acquired by assignment pursuant to the Non-Taxpayer Mid-Level Salary Exception may not exceed four (4) Seasons in length [Article VII, Section 6(e)(2)]."
+    },
+    {
+      "id": "rules_06",
+      "type": "rules",
+      "known_gap": false,
+      "question": "Can a team above the second apron aggregate player salaries in a trade?",
+      "route": "rules",
+      "route_correct": true,
+      "behavior": "answer",
+      "expected_behavior": "answer",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": true,
+      "citation_valid": true,
+      "verdict": {
+        "passed": true,
+        "reason": "ok"
+      },
+      "steps": [
+        "route",
+        "rules",
+        "compose",
+        "verify"
+      ],
+      "tokens": 6953,
+      "seconds": 82.24,
+      "answer": "No. Acquiring a player in a trade using the Aggregated Standard Traded Player Exception is prohibited if, immediately following the trade, the team's Apron Team Salary would exceed the Second Apron Level [Article VII, Section 2(e)(5)]."
+    },
+    {
+      "id": "numbers_01",
+      "type": "numbers",
+      "known_gap": false,
+      "question": "What is the Raptors payroll?",
+      "route": "data",
+      "route_correct": true,
+      "behavior": "answer",
+      "expected_behavior": "answer",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": null,
+      "citation_valid": true,
+      "verdict": {
+        "passed": true,
+        "reason": "ok"
+      },
+      "steps": [
+        "route",
+        "data",
+        "compose",
+        "verify"
+      ],
+      "tokens": 874,
+      "seconds": 5.41,
+      "answer": "The Raptors payroll is $201,188,888 [Contracts data]."
+    },
+    {
+      "id": "numbers_02",
+      "type": "numbers",
+      "known_gap": false,
+      "question": "Are we over the tax line?",
+      "route": "data",
+      "route_correct": true,
+      "behavior": "answer",
+      "expected_behavior": "answer",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": null,
+      "citation_valid": true,
+      "verdict": {
+        "passed": true,
+        "reason": "ok"
+      },
+      "steps": [
+        "route",
+        "data",
+        "compose",
+        "verify"
+      ],
+      "tokens": 1093,
+      "seconds": 6.5,
+      "answer": "Yes, you are over the tax line by $760,888 [Contracts data]."
+    },
+    {
+      "id": "numbers_03",
+      "type": "numbers",
+      "known_gap": false,
+      "question": "How much room do we have under the first apron?",
+      "route": "data",
+      "route_correct": true,
+      "behavior": "answer",
+      "expected_behavior": "answer",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": null,
+      "citation_valid": true,
+      "verdict": {
+        "passed": true,
+        "reason": "ok"
+      },
+      "steps": [
+        "route",
+        "data",
+        "compose",
+        "verify"
+      ],
+      "tokens": 1141,
+      "seconds": 7.29,
+      "answer": "You have $7,826,112 in room under the first apron [Contracts data]."
+    },
+    {
+      "id": "numbers_04",
+      "type": "numbers",
+      "known_gap": false,
+      "question": "What is the Knicks payroll?",
+      "route": "data",
+      "route_correct": true,
+      "behavior": "answer",
+      "expected_behavior": "answer",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": null,
+      "citation_valid": true,
+      "verdict": {
+        "passed": true,
+        "reason": "ok"
+      },
+      "steps": [
+        "route",
+        "data",
+        "compose",
+        "verify"
+      ],
+      "tokens": 913,
+      "seconds": 5.71,
+      "answer": "The New York Knicks' payroll is $220,398,177 [Contracts data]."
+    },
+    {
+      "id": "numbers_05",
+      "type": "numbers",
+      "known_gap": false,
+      "question": "Are the Nets under the cap?",
+      "route": "data",
+      "route_correct": true,
+      "behavior": "answer",
+      "expected_behavior": "answer",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": null,
+      "citation_valid": true,
+      "verdict": {
+        "passed": true,
+        "reason": "ok"
+      },
+      "steps": [
+        "route",
+        "data",
+        "compose",
+        "verify"
+      ],
+      "tokens": 1129,
+      "seconds": 6.82,
+      "answer": "Yes, the Nets (BRK) are under the cap, with their tier listed as under_cap and being under the salary cap by $4,855,861 [Contracts data]."
+    },
+    {
+      "id": "both_01",
+      "type": "both",
+      "known_gap": false,
+      "question": "Can we trade Jakob Poeltl for Dyson Daniels?",
+      "route": "both",
+      "route_correct": true,
+      "behavior": "answer",
+      "expected_behavior": "answer",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": null,
+      "citation_valid": true,
+      "verdict": {
+        "passed": true,
+        "reason": "ok"
+      },
+      "steps": [
+        "route",
+        "rules",
+        "data",
+        "compose",
+        "verify"
+      ],
+      "tokens": 2183,
+      "seconds": 11.28,
+      "answer": "Yes, the trade passes [Contracts data].\n\n* **Atlanta (ATL):** Sends Dyson Daniels ($25,000,000) and receives Jakob Poeltl ($19,500,000), landing at a team salary of $193,003,800 with an allowed maximum incoming salary of $34,095,709 [Contracts data]. The trade passes for Atlanta under [Article VII, Section 6(j)(1)(iv)] [Contracts data].\n* **Toronto (TOR):** Sends Jakob Poeltl ($19,500,000) and receives Dyson Daniels ($25,000,000), landing at a team salary of $206,688,888 with an allowed maximum incoming salary of $28,595,709 [Contracts data]. The trade passes for Toronto under [Article VII, Section 6(j)(1)(iv)] [Contracts data]."
+    },
+    {
+      "id": "both_02",
+      "type": "both",
+      "known_gap": false,
+      "question": "Can we trade Jakob Poeltl for Jarrett Allen?",
+      "route": "both",
+      "route_correct": true,
+      "behavior": "answer",
+      "expected_behavior": "answer",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": null,
+      "citation_valid": true,
+      "verdict": {
+        "passed": true,
+        "reason": "ok"
+      },
+      "steps": [
+        "route",
+        "rules",
+        "data",
+        "compose",
+        "verify"
+      ],
+      "tokens": 4314,
+      "seconds": 11.19,
+      "answer": "No, the trade does not pass [Contracts data]. \n\n* **CLE**: Trade passed: True under rule Article VII, Section 6(j)(1)(iv). CLE sends Jarrett Allen ($28,000,000) and takes Jakob Poeltl ($19,500,000), landing at $200,469,955 with a max incoming salary of $37,095,709 [Contracts data].\n* **TOR**: Trade passed: False under rule Article VII, Section 6(j)(3). TOR sends Jakob Poeltl ($19,500,000) and takes Jarrett Allen ($28,000,000), landing at $209,688,888 with a max incoming salary of $19,500,000 [Contracts data]."
+    },
+    {
+      "id": "both_03",
+      "type": "both",
+      "known_gap": false,
+      "question": "Can Cleveland trade Jarrett Allen for Jakob Poeltl?",
+      "route": "both",
+      "route_correct": true,
+      "behavior": "answer",
+      "expected_behavior": "answer",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": null,
+      "citation_valid": true,
+      "verdict": {
+        "passed": true,
+        "reason": "ok"
+      },
+      "steps": [
+        "route",
+        "rules",
+        "data",
+        "compose",
+        "verify"
+      ],
+      "tokens": 4240,
+      "seconds": 10.88,
+      "answer": "No, the trade does not pass [Contracts data]. \n\nWhile the trade passes for Cleveland under Article VII, Section 6(j)(1)(iv), it fails for Toronto under Article VII, Section 6(j)(3) [Contracts data]."
+    },
+    {
+      "id": "both_04",
+      "type": "both",
+      "known_gap": false,
+      "question": "Would a Jakob Poeltl for Dyson Daniels swap work for Atlanta?",
+      "route": "both",
+      "route_correct": true,
+      "behavior": "answer",
+      "expected_behavior": "answer",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": null,
+      "citation_valid": true,
+      "verdict": {
+        "passed": true,
+        "reason": "ok"
+      },
+      "steps": [
+        "route",
+        "rules",
+        "data",
+        "compose",
+        "verify"
+      ],
+      "tokens": 5029,
+      "seconds": 11.69,
+      "answer": "Yes, the trade passes [Contracts data].\n\n* **Atlanta (ATL)** passes under Article VII, Section 6(j)(1)(iv): ATL sends Dyson Daniels ($25,000,000) and receives Jakob Poeltl ($19,500,000), landing at a team salary of $193,003,800 against an allowed maximum incoming amount of $34,095,709 [Contracts data].\n* **Toronto (TOR)** passes under Article VII, Section 6(j)(1)(iv): TOR sends Jakob Poeltl ($19,500,000) and receives Dyson Daniels ($25,000,000), landing at a team salary of $206,688,888 against an allowed maximum incoming amount of $28,595,709 [Contracts data]."
+    },
+    {
+      "id": "both_05",
+      "type": "both",
+      "known_gap": false,
+      "question": "Can we trade Immanuel Quickley for Stephen Curry?",
+      "route": "both",
+      "route_correct": true,
+      "behavior": "answer",
+      "expected_behavior": "answer",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": null,
+      "citation_valid": true,
+      "verdict": {
+        "passed": true,
+        "reason": "ok"
+      },
+      "steps": [
+        "route",
+        "rules",
+        "data",
+        "compose",
+        "verify"
+      ],
+      "tokens": 4763,
+      "seconds": 12.72,
+      "answer": "No, the trade does not pass [Contracts data]. \n\n- **GSW**: The trade passes for Golden State under [Article VII, Section 6(j)(1)(iv)]. GSW sends Stephen Curry ($62,587,158) and receives Immanuel Quickley ($32,500,000), which is under their maximum incoming salary of $78,483,947 [Contracts data].\n- **TOR**: The trade fails for Toronto under [Article VII, Section 6(j)(3)]. TOR sends Immanuel Quickley ($32,500,000) and receives Stephen Curry ($62,587,158), which exceeds their maximum incoming salary of $32,500,000 [Contracts data]."
+    },
+    {
+      "id": "both_06",
+      "type": "both",
+      "known_gap": false,
+      "question": "Trade James Harden for Stephen Curry",
+      "route": "both",
+      "route_correct": true,
+      "behavior": "answer",
+      "expected_behavior": "answer",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": null,
+      "citation_valid": true,
+      "verdict": {
+        "passed": true,
+        "reason": "ok"
+      },
+      "steps": [
+        "route",
+        "rules",
+        "data",
+        "compose",
+        "verify"
+      ],
+      "tokens": 4990,
+      "seconds": 10.57,
+      "answer": "The trade does not pass [Contracts data].\n\n* **GSW**: Passed under rule Article VII, Section 6(j)(1)(iv) [Contracts data]. GSW sends Stephen Curry ($62,587,158) and takes James Harden ($30,647,619), landing at $187,824,088 (over_cap) with a max incoming salary of $78,483,947 [Contracts data].\n* **CLE**: Failed under rule Article VII, Section 6(j)(3) [Contracts data]. CLE sends James Harden ($30,647,619) and takes Stephen Curry ($62,587,158), landing at $240,909,494 (over_second_apron) with a max incoming salary of $30,647,619 [Contracts data]."
+    },
+    {
+      "id": "ambiguous_01",
+      "type": "ambiguous",
+      "known_gap": false,
+      "question": "can we trade him?",
+      "route": "clarify",
+      "route_correct": true,
+      "behavior": "clarify",
+      "expected_behavior": "clarify",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": null,
+      "citation_valid": null,
+      "verdict": null,
+      "steps": [
+        "route",
+        "clarify"
+      ],
+      "tokens": 0,
+      "seconds": 0.0,
+      "answer": "Which player or trade do you mean?"
+    },
+    {
+      "id": "ambiguous_02",
+      "type": "ambiguous",
+      "known_gap": false,
+      "question": "what about that trade?",
+      "route": "clarify",
+      "route_correct": true,
+      "behavior": "clarify",
+      "expected_behavior": "clarify",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": null,
+      "citation_valid": null,
+      "verdict": null,
+      "steps": [
+        "route",
+        "clarify"
+      ],
+      "tokens": 0,
+      "seconds": 0.0,
+      "answer": "Which player or trade do you mean?"
+    },
+    {
+      "id": "ambiguous_03",
+      "type": "ambiguous",
+      "known_gap": false,
+      "question": "can we make a trade?",
+      "route": "clarify",
+      "route_correct": true,
+      "behavior": "clarify",
+      "expected_behavior": "clarify",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": null,
+      "citation_valid": null,
+      "verdict": null,
+      "steps": [
+        "route",
+        "clarify"
+      ],
+      "tokens": 0,
+      "seconds": 0.0,
+      "answer": "Which players are in the trade?"
+    },
+    {
+      "id": "missing_01",
+      "type": "missing",
+      "known_gap": false,
+      "question": "What was the salary cap in 1995?",
+      "route": "rules",
+      "route_correct": true,
+      "behavior": "abstain",
+      "expected_behavior": "abstain",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": null,
+      "citation_valid": null,
+      "verdict": {
+        "passed": true,
+        "reason": "abstained"
+      },
+      "steps": [
+        "route",
+        "rules",
+        "compose",
+        "verify"
+      ],
+      "tokens": 2117,
+      "seconds": 2.3,
+      "answer": "I couldn't find this in the CBA, so I won't guess."
+    },
+    {
+      "id": "missing_02",
+      "type": "missing",
+      "known_gap": false,
+      "question": "What is the best pizza topping in Toronto?",
+      "route": "rules",
+      "route_correct": true,
+      "behavior": "abstain",
+      "expected_behavior": "abstain",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": null,
+      "citation_valid": null,
+      "verdict": {
+        "passed": true,
+        "reason": "abstained"
+      },
+      "steps": [
+        "route",
+        "rules",
+        "compose",
+        "verify"
+      ],
+      "tokens": 76,
+      "seconds": 0.84,
+      "answer": "I couldn't find this in the CBA, so I won't guess."
+    },
+    {
+      "id": "missing_03",
+      "type": "missing",
+      "known_gap": false,
+      "question": "can the hornets trade James Harden for Stephen Curry",
+      "route": "both",
+      "route_correct": true,
+      "behavior": "abstain",
+      "expected_behavior": "abstain",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": null,
+      "citation_valid": null,
+      "verdict": {
+        "passed": true,
+        "reason": "abstained"
+      },
+      "steps": [
+        "route",
+        "rules",
+        "data",
+        "compose",
+        "verify"
+      ],
+      "tokens": 1829,
+      "seconds": 3.73,
+      "answer": "I couldn't find this in the CBA, so I won't guess."
+    },
+    {
+      "id": "clarify_cap_01",
+      "type": "clarify_cap",
+      "known_gap": false,
+      "question": "can we trade him?",
+      "route": "clarify",
+      "route_correct": true,
+      "behavior": "clarify",
+      "expected_behavior": "clarify",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": null,
+      "citation_valid": null,
+      "verdict": null,
+      "steps": [
+        "route",
+        "clarify"
+      ],
+      "tokens": 0,
+      "seconds": 0.0,
+      "answer": "Which player or trade do you mean?"
+    },
+    {
+      "id": "clarify_cap_02",
+      "type": "clarify_cap",
+      "known_gap": false,
+      "question": "can we trade him?",
+      "route": "clarify",
+      "route_correct": true,
+      "behavior": "abstain",
+      "expected_behavior": "abstain",
+      "behavior_correct": true,
+      "correct": true,
+      "retrieval_hit": null,
+      "citation_valid": null,
+      "verdict": null,
+      "steps": [
+        "route",
+        "abstain"
+      ],
+      "tokens": 0,
+      "seconds": 0.0,
+      "answer": "I couldn't find this in the CBA, so I won't guess."
+    },
+    {
+      "id": "gap_01",
+      "type": "known_gap",
+      "known_gap": true,
+      "question": "What's the limit on taking back salary for a team over the first apron?",
+      "route": "rules",
+      "route_correct": true,
+      "behavior": "abstain",
+      "expected_behavior": "answer",
+      "behavior_correct": false,
+      "correct": false,
+      "retrieval_hit": true,
+      "citation_valid": null,
+      "verdict": {
+        "passed": true,
+        "reason": "abstained"
+      },
+      "steps": [
+        "route",
+        "rules",
+        "compose",
+        "verify"
+      ],
+      "tokens": 2811,
+      "seconds": 7.36,
+      "answer": "I couldn't find this in the CBA, so I won't guess."
+    },
+    {
+      "id": "gap_02",
+      "type": "known_gap",
+      "known_gap": true,
+      "question": "What can a first apron team take back in a trade?",
+      "route": "rules",
+      "route_correct": true,
+      "behavior": "abstain",
+      "expected_behavior": "answer",
+      "behavior_correct": false,
+      "correct": false,
+      "retrieval_hit": false,
+      "citation_valid": null,
+      "verdict": {
+        "passed": true,
+        "reason": "abstained"
+      },
+      "steps": [
+        "route",
+        "rules",
+        "compose",
+        "verify"
+      ],
+      "tokens": 2608,
+      "seconds": 4.28,
+      "answer": "I couldn't find this in the CBA, so I won't guess."
+    },
+    {
+      "id": "gap_03",
+      "type": "known_gap",
+      "known_gap": true,
+      "question": "What is Jakob Poeltl's salary?",
+      "route": "rules",
+      "route_correct": false,
+      "behavior": "abstain",
+      "expected_behavior": "answer",
+      "behavior_correct": false,
+      "correct": false,
+      "retrieval_hit": null,
+      "citation_valid": null,
+      "verdict": {
+        "passed": true,
+        "reason": "abstained"
+      },
+      "steps": [
+        "route",
+        "rules",
+        "compose",
+        "verify"
+      ],
+      "tokens": 1981,
+      "seconds": 3.91,
+      "answer": "I couldn't find this in the CBA, so I won't guess."
+    },
+    {
+      "id": "gap_04",
+      "type": "known_gap",
+      "known_gap": true,
+      "question": "If we trade Jakob Poeltl, what's the largest salary we can take back?",
+      "route": "clarify",
+      "route_correct": false,
+      "behavior": "clarify",
+      "expected_behavior": "answer",
+      "behavior_correct": false,
+      "correct": false,
+      "retrieval_hit": null,
+      "citation_valid": null,
+      "verdict": null,
+      "steps": [
+        "route",
+        "clarify"
+      ],
+      "tokens": 0,
+      "seconds": 0.0,
+      "answer": "Which players are in the trade?"
+    }
+  ]
+}

@@ -6,7 +6,7 @@ from src.tools.contracts import get_all_players
 # TO CHANGE: add a word to one of these lists to route more questions that way.
 
 # words that mean the question needs numbers
-DATA_WORDS = ["payroll", "apron", "cap space", "tax", "room", "salary"]
+DATA_WORDS = ["payroll", "apron", "cap space", "tax", "room", "salary", "cap"]
 
 # words that mean someone is proposing a trade
 TRADE_WORDS = ["trade", "swap", "deal", "acquire"]
