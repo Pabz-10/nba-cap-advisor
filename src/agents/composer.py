@@ -45,6 +45,13 @@ def format_data(data_result):
         line = f"{team}: payroll ${payroll:,}, tier {tier}, next line {next_line}, room to it {room_text}"
         lines.append(line)
 
+        # one line per cap line, so the model never has to do the subtraction
+        for line_name, line_room in status["room_to_lines"].items():
+            if line_room < 0:
+                lines.append(f"{team} vs {line_name}: over by ${-line_room:,}")
+            else:
+                lines.append(f"{team} vs {line_name}: under by ${line_room:,}")
+
     # trade: the overall result, then one line per team
     else:
         lines.append(f"Trade passes: {data_result['trade_passed']}")

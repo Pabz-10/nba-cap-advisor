@@ -158,3 +158,19 @@ def test_trade_side_names_the_players():
 
     assert result["outgoing_players"] == ["Jakob Poeltl"]
     assert result["incoming_players"] == ["Dyson Daniels"]
+
+
+def test_raptors_distance_to_every_line():
+    # negative means over the line
+    lines = get_apron_status(201188888)["room_to_lines"]
+
+    assert lines == {
+        "salary_cap": -36227888,
+        "tax_line": -760888,
+        "first_apron": 7826112,
+        "second_apron": 20497112,
+    }
+
+
+def test_exactly_on_a_line_is_zero_room():
+    assert get_apron_status(FIRST_APRON)["room_to_lines"]["first_apron"] == 0

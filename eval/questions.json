@@ -1,0 +1,393 @@
+[
+  {
+    "id": "rules_01",
+    "type": "rules",
+    "question": "How long after signing can a draft rookie be traded?",
+    "clarify_count": 0,
+    "expected_route": "rules",
+    "expected_behavior": "answer",
+    "expected_citation": "Article VII, Section 8(d)",
+    "must_contain_any": [
+      "thirty",
+      "30"
+    ],
+    "expected_trade_passed": null,
+    "known_gap": false
+  },
+  {
+    "id": "rules_02",
+    "type": "rules",
+    "question": "How long after signing can a free agent be traded?",
+    "clarify_count": 0,
+    "expected_route": "rules",
+    "expected_behavior": "answer",
+    "expected_citation": "Article VII, Section 8(d)(ii)",
+    "must_contain_any": [
+      "three",
+      "3 months"
+    ],
+    "expected_trade_passed": null,
+    "known_gap": false
+  },
+  {
+    "id": "rules_03",
+    "type": "rules",
+    "question": "How often can a team use the Bi-annual Exception?",
+    "clarify_count": 0,
+    "expected_route": "rules",
+    "expected_behavior": "answer",
+    "expected_citation": "Article VII, Section 6(d)(3)",
+    "must_contain_any": [
+      "consecutive"
+    ],
+    "expected_trade_passed": null,
+    "known_gap": false
+  },
+  {
+    "id": "rules_04",
+    "type": "rules",
+    "question": "How long can a Bi-annual Exception contract be?",
+    "clarify_count": 0,
+    "expected_route": "rules",
+    "expected_behavior": "answer",
+    "expected_citation": "Article VII, Section 6(d)(2)",
+    "must_contain_any": [
+      "two",
+      "2"
+    ],
+    "expected_trade_passed": null,
+    "known_gap": false
+  },
+  {
+    "id": "rules_05",
+    "type": "rules",
+    "question": "How long can a Non-Taxpayer Mid-Level contract be?",
+    "clarify_count": 0,
+    "expected_route": "rules",
+    "expected_behavior": "answer",
+    "expected_citation": "Article VII, Section 6(e)(2)",
+    "must_contain_any": [
+      "four",
+      "4"
+    ],
+    "expected_trade_passed": null,
+    "known_gap": false
+  },
+  {
+    "id": "rules_06",
+    "type": "rules",
+    "question": "Can a team above the second apron aggregate player salaries in a trade?",
+    "clarify_count": 0,
+    "expected_route": "rules",
+    "expected_behavior": "answer",
+    "expected_citation": "Article VII, Section 2(e)(5)",
+    "must_contain_any": [
+      "no",
+      "prohibited",
+      "not"
+    ],
+    "expected_trade_passed": null,
+    "known_gap": false
+  },
+  {
+    "id": "numbers_01",
+    "type": "numbers",
+    "question": "What is the Raptors payroll?",
+    "clarify_count": 0,
+    "expected_route": "data",
+    "expected_behavior": "answer",
+    "expected_citation": "Contracts data",
+    "must_contain_any": [
+      "$201,188,888"
+    ],
+    "expected_trade_passed": null,
+    "known_gap": false
+  },
+  {
+    "id": "numbers_02",
+    "type": "numbers",
+    "question": "Are we over the tax line?",
+    "clarify_count": 0,
+    "expected_route": "data",
+    "expected_behavior": "answer",
+    "expected_citation": "Contracts data",
+    "must_contain_any": [
+      "$760,888"
+    ],
+    "expected_trade_passed": null,
+    "known_gap": false
+  },
+  {
+    "id": "numbers_03",
+    "type": "numbers",
+    "question": "How much room do we have under the first apron?",
+    "clarify_count": 0,
+    "expected_route": "data",
+    "expected_behavior": "answer",
+    "expected_citation": "Contracts data",
+    "must_contain_any": [
+      "$7,826,112"
+    ],
+    "expected_trade_passed": null,
+    "known_gap": false
+  },
+  {
+    "id": "numbers_04",
+    "type": "numbers",
+    "question": "What is the Knicks payroll?",
+    "clarify_count": 0,
+    "expected_route": "data",
+    "expected_behavior": "answer",
+    "expected_citation": "Contracts data",
+    "must_contain_any": [
+      "$220,398,177"
+    ],
+    "expected_trade_passed": null,
+    "known_gap": false
+  },
+  {
+    "id": "numbers_05",
+    "type": "numbers",
+    "question": "Are the Nets under the cap?",
+    "clarify_count": 0,
+    "expected_route": "data",
+    "expected_behavior": "answer",
+    "expected_citation": "Contracts data",
+    "must_contain_any": [
+      "yes",
+      "under"
+    ],
+    "expected_trade_passed": null,
+    "known_gap": false
+  },
+  {
+    "id": "both_01",
+    "type": "both",
+    "question": "Can we trade Jakob Poeltl for Dyson Daniels?",
+    "clarify_count": 0,
+    "expected_route": "both",
+    "expected_behavior": "answer",
+    "expected_citation": "Contracts data",
+    "must_contain_any": [
+      "passes",
+      "pass"
+    ],
+    "expected_trade_passed": true,
+    "known_gap": false
+  },
+  {
+    "id": "both_02",
+    "type": "both",
+    "question": "Can we trade Jakob Poeltl for Jarrett Allen?",
+    "clarify_count": 0,
+    "expected_route": "both",
+    "expected_behavior": "answer",
+    "expected_citation": "Contracts data",
+    "must_contain_any": [
+      "not",
+      "fail"
+    ],
+    "expected_trade_passed": false,
+    "known_gap": false
+  },
+  {
+    "id": "both_03",
+    "type": "both",
+    "question": "Can Cleveland trade Jarrett Allen for Jakob Poeltl?",
+    "clarify_count": 0,
+    "expected_route": "both",
+    "expected_behavior": "answer",
+    "expected_citation": "Contracts data",
+    "must_contain_any": [
+      "not",
+      "fail"
+    ],
+    "expected_trade_passed": false,
+    "known_gap": false
+  },
+  {
+    "id": "both_04",
+    "type": "both",
+    "question": "Would a Jakob Poeltl for Dyson Daniels swap work for Atlanta?",
+    "clarify_count": 0,
+    "expected_route": "both",
+    "expected_behavior": "answer",
+    "expected_citation": "Contracts data",
+    "must_contain_any": [
+      "passes",
+      "pass"
+    ],
+    "expected_trade_passed": true,
+    "known_gap": false
+  },
+  {
+    "id": "both_05",
+    "type": "both",
+    "question": "Can we trade Immanuel Quickley for Stephen Curry?",
+    "clarify_count": 0,
+    "expected_route": "both",
+    "expected_behavior": "answer",
+    "expected_citation": "Contracts data",
+    "must_contain_any": [
+      "not",
+      "fail"
+    ],
+    "expected_trade_passed": false,
+    "known_gap": false
+  },
+  {
+    "id": "both_06",
+    "type": "both",
+    "question": "Trade James Harden for Stephen Curry",
+    "clarify_count": 0,
+    "expected_route": "both",
+    "expected_behavior": "answer",
+    "expected_citation": "Contracts data",
+    "must_contain_any": [
+      "not",
+      "fail"
+    ],
+    "expected_trade_passed": false,
+    "known_gap": false
+  },
+  {
+    "id": "ambiguous_01",
+    "type": "ambiguous",
+    "question": "can we trade him?",
+    "clarify_count": 0,
+    "expected_route": "clarify",
+    "expected_behavior": "clarify",
+    "expected_citation": null,
+    "must_contain_any": [],
+    "expected_trade_passed": null,
+    "known_gap": false
+  },
+  {
+    "id": "ambiguous_02",
+    "type": "ambiguous",
+    "question": "what about that trade?",
+    "clarify_count": 0,
+    "expected_route": "clarify",
+    "expected_behavior": "clarify",
+    "expected_citation": null,
+    "must_contain_any": [],
+    "expected_trade_passed": null,
+    "known_gap": false
+  },
+  {
+    "id": "ambiguous_03",
+    "type": "ambiguous",
+    "question": "can we make a trade?",
+    "clarify_count": 0,
+    "expected_route": "clarify",
+    "expected_behavior": "clarify",
+    "expected_citation": null,
+    "must_contain_any": [],
+    "expected_trade_passed": null,
+    "known_gap": false
+  },
+  {
+    "id": "missing_01",
+    "type": "missing",
+    "question": "What was the salary cap in 1995?",
+    "clarify_count": 0,
+    "expected_route": "rules",
+    "expected_behavior": "abstain",
+    "expected_citation": null,
+    "must_contain_any": [],
+    "expected_trade_passed": null,
+    "known_gap": false
+  },
+  {
+    "id": "missing_02",
+    "type": "missing",
+    "question": "What is the best pizza topping in Toronto?",
+    "clarify_count": 0,
+    "expected_route": "rules",
+    "expected_behavior": "abstain",
+    "expected_citation": null,
+    "must_contain_any": [],
+    "expected_trade_passed": null,
+    "known_gap": false
+  },
+  {
+    "id": "missing_03",
+    "type": "missing",
+    "question": "can the hornets trade James Harden for Stephen Curry",
+    "clarify_count": 0,
+    "expected_route": "both",
+    "expected_behavior": "abstain",
+    "expected_citation": null,
+    "must_contain_any": [],
+    "expected_trade_passed": null,
+    "known_gap": false
+  },
+  {
+    "id": "clarify_cap_01",
+    "type": "clarify_cap",
+    "question": "can we trade him?",
+    "clarify_count": 1,
+    "expected_route": "clarify",
+    "expected_behavior": "clarify",
+    "expected_citation": null,
+    "must_contain_any": [],
+    "expected_trade_passed": null,
+    "known_gap": false
+  },
+  {
+    "id": "clarify_cap_02",
+    "type": "clarify_cap",
+    "question": "can we trade him?",
+    "clarify_count": 2,
+    "expected_route": "clarify",
+    "expected_behavior": "abstain",
+    "expected_citation": null,
+    "must_contain_any": [],
+    "expected_trade_passed": null,
+    "known_gap": false
+  },
+  {
+    "id": "gap_01",
+    "type": "known_gap",
+    "question": "What's the limit on taking back salary for a team over the first apron?",
+    "clarify_count": 0,
+    "expected_route": "rules",
+    "expected_behavior": "answer",
+    "expected_citation": "Article VII, Section 6(j)(3)",
+    "must_contain_any": [
+      "100%",
+      "100 percent"
+    ],
+    "expected_trade_passed": null,
+    "known_gap": true
+  },
+  {
+    "id": "gap_02",
+    "type": "known_gap",
+    "question": "What can a first apron team take back in a trade?",
+    "clarify_count": 0,
+    "expected_route": "rules",
+    "expected_behavior": "answer",
+    "expected_citation": "Article VII, Section 6(j)(3)",
+    "must_contain_any": [
+      "100%",
+      "100 percent"
+    ],
+    "expected_trade_passed": null,
+    "known_gap": true
+  },
+  {
+    "id": "gap_03",
+    "type": "known_gap",
+    "question": "What is Jakob Poeltl's salary?",
+    "clarify_count": 0,
+    "expected_route": "data",
+    "expected_behavior": "answer",
+    "expected_citation": "Contracts data",
+    "must_contain_any": [
+      "$19,500,000"
+    ],
+    "expected_trade_passed": null,
+    "known_gap": true
+  }
+]

@@ -99,6 +99,13 @@ def get_apron_status(payroll):
         "tier": tier,
         "next_line": next_line,
         "room": room,
+        # how far below each line the payroll is (negative means over it)
+        "room_to_lines": {
+            "salary_cap": room_to_cap,
+            "tax_line": room_to_tax,
+            "first_apron": room_to_first_apron,
+            "second_apron": room_to_second_apron,
+        },
     }
 
 def check_trade_side(team, outgoing_ids, incoming_ids):

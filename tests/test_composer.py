@@ -98,7 +98,13 @@ def test_gemini_error_fails_closed(monkeypatch):
 NO_TRADE_DATA = {
     "team": "TOR",
     "payroll": 201188888,
-    "status": {"payroll": 201188888, "tier": "over_tax", "next_line": "first_apron", "room": 7826112},
+    "status": {
+        "payroll": 201188888,
+        "tier": "over_tax",
+        "next_line": "first_apron",
+        "room": 7826112,
+        "room_to_lines": {"salary_cap": -36227888, "tax_line": -760888, "first_apron": 7826112, "second_apron": 20497112},
+    },
     "trade_sides": None,
     "trade_passed": None,
     "error": None,
@@ -154,7 +160,13 @@ def test_format_data_puts_commas_in_room():
 
 
 def test_format_data_handles_no_room_over_the_second_apron():
-    status = {"payroll": 230000000, "tier": "over_second_apron", "next_line": None, "room": None}
+    status = {
+        "payroll": 230000000,
+        "tier": "over_second_apron",
+        "next_line": None,
+        "room": None,
+        "room_to_lines": {"salary_cap": -65039000, "tax_line": -29572000, "first_apron": -20985000, "second_apron": -8314000},
+    }
     data = dict(NO_TRADE_DATA, payroll=230000000, status=status)
 
     assert "room to it none" in format_data(data)
@@ -292,3 +304,13 @@ def test_feedback_never_becomes_evidence(monkeypatch):
     result = compose_answer("trade?", None, TRADE_DATA, "Your answer was: $19,500")
 
     assert "Your answer was" not in result["evidence"]
+
+
+def test_format_data_shows_distance_to_every_line():
+    # Without these the model refused "how far over the tax are we?", since it isn't allowed to calculate.
+    text = format_data(NO_TRADE_DATA)
+
+    assert "TOR vs salary_cap: over by $36,227,888" in text
+    assert "TOR vs tax_line: over by $760,888" in text
+    assert "TOR vs first_apron: under by $7,826,112" in text
+    assert "TOR vs second_apron: under by $20,497,112" in text
