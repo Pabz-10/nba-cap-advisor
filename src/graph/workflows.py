@@ -1,3 +1,4 @@
+import time
 from langgraph.graph import END, START, StateGraph
 from typing import TypedDict
 
@@ -6,7 +7,7 @@ from src.agents.data_agent import run_data_agent
 from src.agents.router import route_question
 from src.agents.rules_agent import run_rules_agent
 from src.agents.verifier import verify_answer
-from src.config import TOP_K, MAX_REVISES, MAX_CLARIFY
+from src.config import MAX_CLARIFY, MAX_REVISES, MAX_STEPS, TIME_LIMIT_SECONDS, TOP_K
 
 
 class AdvisorState(TypedDict):
@@ -24,6 +25,7 @@ class AdvisorState(TypedDict):
     verdict: dict | None
     revise_count: int
     steps: list
+    started_at: float
 
 
 def new_state(question, top_k=TOP_K, tier=None, clarify_count=0):
@@ -43,6 +45,7 @@ def new_state(question, top_k=TOP_K, tier=None, clarify_count=0):
         "verdict": None,
         "revise_count": 0,
         "steps": [],
+        "started_at": time.time(),
     }
 
 
@@ -240,6 +243,11 @@ def after_verify_dynamic(state):
 
     if verdict["passed"]:
         return "done"
+     # if time.time() - state["started_at"] > TIME_LIMIT_SECONDS, return "abstain"
+
+    if time.time() - state["started_at"] > TIME_LIMIT_SECONDS:
+        return "abstain"
+    
     #revise_count < MAX_REVISES -> return "revise"
     elif state["revise_count"] < MAX_REVISES:
         return "revise" 
@@ -294,3 +302,15 @@ def build_dynamic_graph():
 
 
     return graph.compile() 
+
+def run_workflow(graph, question, top_k=TOP_K, tier=None, clarify_count=0):
+    """Run a graph with a hard step cap. Anything unexpected abstains instead of crashing."""
+    state = new_state(question, top_k, tier, clarify_count)
+
+    try:
+        return graph.invoke(state, {"recursion_limit": MAX_STEPS})
+
+    except Exception as e:
+        stopped = state | abstain_node(state)
+        stopped["steps"] = stopped["steps"] + ["stopped: " + type(e).__name__]
+        return stopped

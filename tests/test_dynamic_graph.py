@@ -1,3 +1,5 @@
+import time
+
 from src.config import MAX_CLARIFY, MAX_REVISES
 from src.graph import workflows
 from src.graph.workflows import (
@@ -54,11 +56,11 @@ def test_after_verify_passed_is_done():
 
 
 def test_after_verify_first_failure_revises():
-    assert after_verify_dynamic({"verdict": {"passed": False}, "revise_count": 0}) == "revise"
+    assert after_verify_dynamic({"verdict": {"passed": False}, "revise_count": 0, "started_at": time.time()}) == "revise"
 
 
 def test_after_verify_stops_revising_at_the_limit():
-    assert after_verify_dynamic({"verdict": {"passed": False}, "revise_count": MAX_REVISES}) == "abstain"
+    assert after_verify_dynamic({"verdict": {"passed": False}, "revise_count": MAX_REVISES, "started_at": time.time()}) == "abstain"
 
 
 # The paths through the graph

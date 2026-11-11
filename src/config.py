@@ -41,3 +41,6 @@ LLM_MAX_ATTEMPTS = 3
 
 MAX_CLARIFY = 2  # stops asking the user follow-up questions after this many, then abstains
 MAX_REVISES = 1  # rewrites a rejected answer this many times, then abstains
+
+MAX_STEPS = 15  # hard cap on nodes per run, the longest normal path is 9
+TIME_LIMIT_SECONDS = 60  # no more retries once a run has taken this long

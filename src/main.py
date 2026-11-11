@@ -1,7 +1,11 @@
+"""Ask the NBA Cap and Trade Advisor a question from the command line.
+
+Run with: python -m src.main "What is the Raptors payroll?" --mode dynamic
+"""
 import argparse
+
 from src.config import TOP_K
-from src.agents.rules_agent import run_rules_agent
-from src.agents.composer import compose_answer
+from src.graph.workflows import build_dynamic_graph, build_static_graph, run_workflow
 
 PREVIEW_CHARS = 160
 
@@ -9,45 +13,81 @@ PREVIEW_CHARS = 160
 def parse_args():
     parser = argparse.ArgumentParser(description="NBA Cap and Trade Advisor")
     parser.add_argument("question", help="the question to ask, in quotes")
+    parser.add_argument("--mode", choices=["static", "dynamic"], default="dynamic", help="which workflow to run")
     parser.add_argument("--top-k", type=int, default=TOP_K, help="how many chunks to retrieve")
     parser.add_argument("--tier", choices=["core", "maybe"], help="only search this tier")
-    parser.add_argument("--show-chunks", action="store_true", help="also print the retrieved chunks")
+    parser.add_argument("--show-chunks", action="store_true", help="also print the retrieved chunks and any reworded search")
     return parser.parse_args()
 
 
+def build_graph(mode):
+    """Pick the workflow to run."""
+    if mode == "static":
+        return build_static_graph()
+    return build_dynamic_graph()
+
+
+def run_with_clarifying(graph, question, top_k, tier):
+    """Run the workflow, asking the user for more detail whenever it needs it."""
+    clarify_count = 0
+
+    while True:
+        result = run_workflow(graph, question, top_k, tier, clarify_count)
+
+        # an answer or a refusal means we're done
+        if result["composed"] is not None:
+            return question, result
+
+        # no answer means the graph stopped to ask a question
+        reply = input("\n" + result["clarify_question"] + " ")
+        question = question + " " + reply
+        clarify_count = result["clarify_count"]
+
+
+def print_search(rules_result, show_rewrite):
+    """Print how the CBA search went."""
+    print(f"Best score: {rules_result['best_score']:.3f} (passed: {rules_result['passed']})")
+
+    if show_rewrite and rules_result["rewritten_query"]:
+        print(f"Reworded as: {rules_result['rewritten_query']}")
+
+
 def print_chunks(chunks):
-    # prints each retrieved chunk with its score, citation, pages, tier and a short preview
+    """Print each retrieved chunk with its score, citation, pages, tier and a short preview."""
     for rank, chunk in enumerate(chunks, start=1):
         body = chunk["text"].split("\n", 1)[1]
         print(f"{rank}. [{chunk['score']:.3f}] {chunk['citation']} (p. {chunk['pages']}, {chunk['tier']})")
         print(f"   {body[:PREVIEW_CHARS]}...\n")
 
 
+def print_result(result, show_rewrite=False):
+    """Print the path the question took, the checks, and the answer."""
+    print(f"Route: {result['route']}")
+    print("Steps: " + " -> ".join(result["steps"]))
+
+    # the CBA search is skipped on some routes
+    if result["rules_result"] is not None:
+        print_search(result["rules_result"], show_rewrite)
+
+    # the verifier is skipped if the run stopped early
+    if result["verdict"] is not None:
+        print(f"Verified: {result['verdict']['passed']} ({result['verdict']['reason']})")
+
+    print(f"\nAnswer: {result['composed']['answer']}\n")
+
+
 def main():
     args = parse_args()
+    graph = build_graph(args.mode)
 
-    # run the rules agent with the question, top_k and tier
-    rules_agent_res = run_rules_agent(args.question, args.top_k, args.tier)
+    question, result = run_with_clarifying(graph, args.question, args.top_k, args.tier)
 
-    # run the composer with the question and the rules result
-    composer_res = compose_answer(args.question, rules_agent_res)
+    print(f"\nQuestion: {question}")
+    print(f"Settings: mode={args.mode}, top_k={args.top_k}, tier={args.tier or 'all'}\n")
+    print_result(result, args.show_chunks)
 
-    print(f"\nQuestion: {args.question}")
-    print(f"Settings: top_k={args.top_k}, tier={args.tier or 'all'}\n")
-
-    # if a rewrite was used, print the reworded question
-    if rules_agent_res["rewritten_query"]:
-        print(f"Reworded as: {rules_agent_res['rewritten_query']}")
-
-    # print the best score and whether it passed
-    print(f"Best score: {rules_agent_res['best_score']:.3f} (passed: {rules_agent_res['passed']})\n")
-
-    # print the answer
-    print(f"Answer: {composer_res['answer']}\n")
-
-    # if --show-chunks was passed, print the chunks the answer was built from
-    if args.show_chunks:
-        print_chunks(rules_agent_res["chunks"])
+    if args.show_chunks and result["rules_result"] is not None:
+        print_chunks(result["rules_result"]["chunks"])
 
 
 if __name__ == "__main__":
