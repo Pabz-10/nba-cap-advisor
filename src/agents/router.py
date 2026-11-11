@@ -3,6 +3,8 @@ import re
 from src.config import HOME_TEAM
 from src.tools.contracts import get_all_players
 
+# TO CHANGE: add a word to one of these lists to route more questions that way.
+
 # words that mean the question needs numbers
 DATA_WORDS = ["payroll", "apron", "cap space", "tax", "room", "salary"]
 
@@ -109,6 +111,9 @@ def route_question(question):
     team = find_team(question)
     players = find_players(question)
     trade = build_trade(players)
+
+    # TO CHANGE: the ifs below run top to bottom and the first match wins,
+    # so a new rule has to go above anything it should beat.
 
     # check which kinds of words the question has
     is_vague = any(has_word(word, question) for word in VAGUE_WORDS)

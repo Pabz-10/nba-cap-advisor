@@ -38,3 +38,6 @@ VERIFIER_MODEL = "models/gemini-3.8-flash"
 LLM_TIMEOUT_SECONDS = 30
 LLM_MAX_ATTEMPTS = 3
 
+
+MAX_CLARIFY = 2  # stops asking the user follow-up questions after this many, then abstains
+MAX_REVISES = 1  # rewrites a rejected answer this many times, then abstains

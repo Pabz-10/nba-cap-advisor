@@ -6,7 +6,7 @@ from src.agents.data_agent import run_data_agent
 from src.agents.router import route_question
 from src.agents.rules_agent import run_rules_agent
 from src.agents.verifier import verify_answer
-from src.config import TOP_K
+from src.config import TOP_K, MAX_REVISES, MAX_CLARIFY
 
 
 class AdvisorState(TypedDict):
@@ -148,6 +148,7 @@ def after_verify_static(state):
     return "abstain"
 
 
+## STATIC WORKFLOW
 def build_static_graph():
     """Every question takes the same straight line."""
     graph = StateGraph(AdvisorState)
@@ -174,3 +175,117 @@ def build_static_graph():
     graph.add_edge("abstain", END)
 
     return graph.compile()
+
+
+# DYNAMIC WORKFLOW 
+
+def clarify_node(state):
+    """Count the clarifying question. The question itself is already in state from the router."""
+    clarify_count = state["clarify_count"]
+    return {
+        "clarify_count" : clarify_count + 1,
+        "steps": state["steps"] + ["clarify"]
+        }
+
+
+def revise_node(state):
+    """Count the retry before going back to compose."""
+    # TODO: return revise_count + 1, and steps (add "revise")
+    revise_count = state["revise_count"]
+
+    return {
+            "revise_count" : revise_count + 1,
+            "steps": state["steps"] + ["revise"] 
+            }
+
+def after_route(state):
+    """Pick the first stop based on the router's decision."""
+    route = state["route"]
+
+    # asked too many times already: stop asking
+    if route == "clarify" and state["clarify_count"] >= MAX_CLARIFY:
+        return "abstain"
+
+    # route is clarify -> return "clarify"
+    if route == "clarify":
+        return "clarify"
+    # route is data -> return "data"
+    elif route == "data":
+            return "data"
+    # anything else (rules or both) -> return "rules"
+    else:
+        return "rules"
+
+
+def after_rules(state):
+    """A 'both' question still needs the numbers, a 'rules' question doesn't."""
+    # route is both -> return "data", otherwise return "compose"
+
+    route = state["route"]
+    if route == "both":
+        return "data"
+    else:
+        return "compose"
+
+
+def after_verify_dynamic(state):
+    """Passed ends, a first failure gets one retry, then abstain."""
+    #  verdict passed -> return "done"
+    verdict = state["verdict"]
+
+    if verdict["passed"]:
+        return "done"
+    #revise_count < MAX_REVISES -> return "revise"
+    elif state["revise_count"] < MAX_REVISES:
+        return "revise" 
+    else:
+        return "abstain"
+
+
+def build_dynamic_graph():
+    """The path depends on the question and on what comes back."""
+    graph = StateGraph(AdvisorState)
+
+    # add the same 6 nodes as static, plus clarify and revise
+    graph.add_node("route", route_node)
+    graph.add_node("rules", rules_node)
+    graph.add_node("data", data_node)
+    graph.add_node("compose", compose_node)
+    graph.add_node("verify", verify_node)
+    graph.add_node("abstain", abstain_node)
+    graph.add_node("clarify", clarify_node)
+    graph.add_node("revise", revise_node)
+
+
+    graph.add_edge(START, "route")
+
+    # fork 1: where does this question start
+    graph.add_conditional_edges("route", after_route, {
+        "clarify": "clarify",
+        "rules": "rules",
+        "data": "data",
+        "abstain": "abstain",
+    })
+
+    # fork 2: does it need numbers too
+    graph.add_conditional_edges("rules", after_rules, {"data": "data", "compose": "compose"})
+
+    graph.add_edge("data", "compose")
+    graph.add_edge("compose", "verify")
+
+    # fork 3: did it pass
+    graph.add_conditional_edges("verify", after_verify_dynamic, {
+        "done": END,
+        "revise": "revise",
+        "abstain": "abstain",
+    })
+
+    # revise -> compose (this is the loop)
+    # clarify -> END
+    # abstain -> END
+    graph.add_edge("revise", "compose")
+    graph.add_edge("clarify", END)
+    graph.add_edge("abstain", END)
+
+
+    return graph.compile() 
