@@ -37,7 +37,12 @@ def format_data(data_result):
         next_line = status["next_line"]
         room = status["room"]
 
-        line = f"{team}: payroll ${payroll:,}, tier {tier}, next line {next_line}, room to it ${room}"
+        # room is None over the second apron, since there's no line above it
+        room_text = "none"
+        if room is not None:
+            room_text = f"${room:,}"
+
+        line = f"{team}: payroll ${payroll:,}, tier {tier}, next line {next_line}, room to it {room_text}"
         lines.append(line)
 
     # trade: the overall result, then one line per team

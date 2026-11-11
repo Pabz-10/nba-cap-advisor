@@ -47,7 +47,7 @@ def check_with_model(question, answer, evidence):
     """Ask the model if the evidence supports the answer. Fail closed if it errors."""
     # TODO: prompt: question + evidence + answer, "Reply with exactly SUPPORTED or NOT_SUPPORTED"
 
-    instructions = """You are checking an answer about the NBA CBA and team salaries. Decide if every claim in the answer is supported by the evidence. Use only the evidence, not outside knowledge.
+    instructions = """You are checking an answer about the NBA CBA and team salaries. Decide if every claim in the answer is supported by the evidence. Use only the evidence, not outside knowledge. The one exception: team codes like TOR or CLE are standard NBA abbreviations, so treat a code and its team name or city as the same team.
 
 Reply with exactly SUPPORTED or NOT_SUPPORTED.
 """

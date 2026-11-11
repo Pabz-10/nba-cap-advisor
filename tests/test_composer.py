@@ -148,6 +148,18 @@ def test_format_data_without_a_trade_shows_the_team_numbers():
     assert "over_tax" in text
 
 
+def test_format_data_puts_commas_in_room():
+    # The verifier compares amounts exactly, so these have to match how the model writes them.
+    assert "room to it $7,826,112" in format_data(NO_TRADE_DATA)
+
+
+def test_format_data_handles_no_room_over_the_second_apron():
+    status = {"payroll": 230000000, "tier": "over_second_apron", "next_line": None, "room": None}
+    data = dict(NO_TRADE_DATA, payroll=230000000, status=status)
+
+    assert "room to it none" in format_data(data)
+
+
 def test_format_data_with_a_trade_has_one_line_per_team():
     lines = format_data(TRADE_DATA).split("\n")
 
