@@ -109,15 +109,20 @@ def check_trade_side(team, outgoing_ids, incoming_ids):
     # look up outgoing and incoming players, and add up each side's salaries
     # a team can only trade away its own players (the other side's check covers incoming players)
     outgoing_total = 0
+    outgoing_players = []
     for player_id in outgoing_ids:
         player = get_player(player_id)
         if player["team"] != team:
             raise ValueError(player["player"] + " is on " + player["team"] + ", not " + team)
         outgoing_total = outgoing_total + player["salary"]
+        outgoing_players.append(player["player"])
 
     incoming_total = 0
+    incoming_players = []
     for player_id in incoming_ids:
-        incoming_total = incoming_total + get_player(player_id)["salary"]
+        player = get_player(player_id)
+        incoming_total = incoming_total + player["salary"]
+        incoming_players.append(player["player"])
 
     # work out the payroll after the trade and its apron status
     payroll_after = payroll_before - outgoing_total + incoming_total
@@ -154,6 +159,8 @@ def check_trade_side(team, outgoing_ids, incoming_ids):
         "payroll_before": payroll_before,
         "payroll_after": payroll_after,
         "tier_after": tier_after,
+        "outgoing_players": outgoing_players,
+        "incoming_players": incoming_players,
         "outgoing_total": outgoing_total,
         "incoming_total": incoming_total,
         "max_incoming": max_incoming,

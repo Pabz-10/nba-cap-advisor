@@ -151,3 +151,10 @@ def test_team_cannot_trade_away_another_teams_player():
     # Daniels plays for Atlanta, so Toronto can't send him out.
     with pytest.raises(ValueError):
         check_trade_side("TOR", ["daniedy01"], ["poeltja01"])
+
+
+def test_trade_side_names_the_players():
+    result = check_trade_side("TOR", ["poeltja01"], ["daniedy01"])
+
+    assert result["outgoing_players"] == ["Jakob Poeltl"]
+    assert result["incoming_players"] == ["Dyson Daniels"]
