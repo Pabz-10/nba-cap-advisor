@@ -1,4 +1,15 @@
+import logging
+import os
 from functools import lru_cache
+
+# Quiet the startup noise from the embedding libraries. This has to run before they're imported.
+# Offline mode loads MiniLM from the local cache, so search works without internet.
+os.environ.setdefault("HF_HUB_OFFLINE", "1")
+os.environ.setdefault("HF_HUB_VERBOSITY", "error")
+os.environ.setdefault("HF_HUB_DISABLE_PROGRESS_BARS", "1")
+os.environ.setdefault("TRANSFORMERS_VERBOSITY", "error")
+for noisy_logger in ["torch.distributed.elastic.multiprocessing.redirects", "sentence_transformers", "huggingface_hub"]:
+    logging.getLogger(noisy_logger).setLevel(logging.ERROR)
 
 import chromadb
 from sentence_transformers import SentenceTransformer

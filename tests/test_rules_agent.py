@@ -1,5 +1,6 @@
 from src.agents import rules_agent
 from src.agents.rules_agent import search_and_check, run_rules_agent
+from src.config import TOP_K
 
 ROOKIE_QUESTION = "How long after signing can a draft rookie be traded?"
 PIZZA_QUESTION = "What is the best pizza topping in Toronto?"
@@ -21,7 +22,7 @@ def test_off_topic_question_fails_the_threshold():
 def test_failed_search_still_returns_its_chunks_and_score():
     result = search_and_check(PIZZA_QUESTION)
 
-    assert len(result["chunks"]) == 5
+    assert len(result["chunks"]) == TOP_K
     assert result["best_score"] < 0.55
 
 
@@ -79,7 +80,7 @@ def test_weak_question_is_saved_by_a_good_rewrite(monkeypatch):
 
     assert result["passed"] is True
     assert result["rewritten_query"] == ROOKIE_QUESTION
-    assert len(result["chunks"]) == 5
+    assert len(result["chunks"]) == TOP_K
 
 
 def test_rewrite_that_still_fails_abstains(monkeypatch):

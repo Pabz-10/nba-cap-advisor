@@ -105,3 +105,13 @@ def test_a_crash_inside_an_agent_abstains_and_says_why(monkeypatch):
 
     assert result["composed"]["abstained"] is True
     assert result["steps"][-1] == "stopped: TypeError"
+
+
+def test_on_step_hears_every_step_in_order(monkeypatch):
+    fake_agents(monkeypatch, passed=True)
+    heard = []
+
+    result = run_workflow(build_dynamic_graph(), DATA_QUESTION, on_step=heard.append)
+
+    assert heard == ["route", "data", "compose", "verify"]
+    assert heard == result["steps"]

@@ -15,7 +15,7 @@ def fake_run(monkeypatch, results):
     calls = []
     remaining = list(results)
 
-    def run(graph, question, top_k, tier, clarify_count):
+    def run(graph, question, top_k, tier, clarify_count, on_step=None):
         calls.append((question, clarify_count))
         return remaining.pop(0)
 
@@ -95,3 +95,9 @@ def test_rewrite_is_shown_when_asked(capsys):
     cli.print_search(REWORDED_SEARCH, show_rewrite=True)
 
     assert "Reworded as: a reworded search" in capsys.readouterr().out
+
+
+def test_each_step_prints_a_readable_label(capsys):
+    cli.show_step("rules")
+
+    assert capsys.readouterr().out == "  - Searched the CBA\n"

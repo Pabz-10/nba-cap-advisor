@@ -303,12 +303,20 @@ def build_dynamic_graph():
 
     return graph.compile() 
 
-def run_workflow(graph, question, top_k=TOP_K, tier=None, clarify_count=0):
-    """Run a graph with a hard step cap. Anything unexpected abstains instead of crashing."""
+def run_workflow(graph, question, top_k=TOP_K, tier=None, clarify_count=0, on_step=None):
+    """Run a graph with a hard step cap. Anything unexpected abstains instead of crashing.
+
+    on_step is optional: if given, it's called with each step's name as soon as that step finishes.
+    """
     state = new_state(question, top_k, tier, clarify_count)
 
     try:
-        return graph.invoke(state, {"recursion_limit": MAX_STEPS})
+        # stream gives us the state after every step, so we can report progress live
+        result = state
+        for result in graph.stream(state, {"recursion_limit": MAX_STEPS}, stream_mode="values"):
+            if on_step and result["steps"]:
+                on_step(result["steps"][-1])
+        return result
 
     except Exception as e:
         stopped = state | abstain_node(state)

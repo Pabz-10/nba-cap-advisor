@@ -29,7 +29,7 @@ MAX_CHUNK_TOKENS = 230  # MiniLM reads 256 tokens; leaves room for special token
 VECTORSTORE_DIR = ROOT / "vectorstore"
 COLLECTION_NAME = "cba_2023"
 
-TOP_K = 5
+TOP_K = 8
 SIMILARITY_THRESHOLD = 0.55  # starting guess, the eval sets the final number
 
 REWRITE_MODEL = "models/gemini-3.5-flash-lite"

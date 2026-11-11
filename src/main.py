@@ -9,6 +9,18 @@ from src.graph.workflows import build_dynamic_graph, build_static_graph, run_wor
 
 PREVIEW_CHARS = 160
 
+# what to print as each step finishes
+STEP_LABELS = {
+    "route": "Read the question",
+    "clarify": "Needs more detail",
+    "rules": "Searched the CBA",
+    "data": "Looked up team numbers",
+    "compose": "Wrote the answer",
+    "verify": "Checked the answer",
+    "revise": "Answer failed a check, retrying",
+    "abstain": "Not confident enough to answer",
+}
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description="NBA Cap and Trade Advisor")
@@ -27,12 +39,18 @@ def build_graph(mode):
     return build_dynamic_graph()
 
 
+def show_step(step):
+    """Print one line of progress as soon as a step finishes."""
+    print("  - " + STEP_LABELS.get(step, step), flush=True)
+
+
 def run_with_clarifying(graph, question, top_k, tier):
     """Run the workflow, asking the user for more detail whenever it needs it."""
     clarify_count = 0
 
     while True:
-        result = run_workflow(graph, question, top_k, tier, clarify_count)
+        print("\nWorking on it...", flush=True)
+        result = run_workflow(graph, question, top_k, tier, clarify_count, show_step)
 
         # an answer or a refusal means we're done
         if result["composed"] is not None:

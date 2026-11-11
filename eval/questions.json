@@ -389,5 +389,19 @@
     ],
     "expected_trade_passed": null,
     "known_gap": true
+  },
+  {
+    "id": "gap_04",
+    "type": "known_gap",
+    "question": "If we trade Jakob Poeltl, what's the largest salary we can take back?",
+    "clarify_count": 0,
+    "expected_route": "data",
+    "expected_behavior": "answer",
+    "expected_citation": "Contracts data",
+    "must_contain_any": [
+      "$27,326,112"
+    ],
+    "expected_trade_passed": null,
+    "known_gap": true
   }
 ]
