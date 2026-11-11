@@ -74,6 +74,7 @@ def compose_answer(question, rules_result=None, data_result=None):
             "answer": NOT_FOUND,
             "abstained": True,
             "sources": [],
+            "evidence": "",
         }
 
     chunks = []
@@ -108,6 +109,7 @@ CBA sections:
             "answer": NOT_FOUND,
             "abstained": True,
             "sources": [],
+            "evidence": "",
         }
 
     answer = reply.text.strip()
@@ -127,4 +129,5 @@ CBA sections:
         "answer": answer,
         "abstained": answer == NOT_FOUND,
         "sources": sources,
+        "evidence": format_chunks(chunks) + data_text,
     }

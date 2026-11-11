@@ -230,3 +230,24 @@ def test_gemini_failure_with_numbers_fails_closed(monkeypatch):
 
     assert result["abstained"] is True
     assert result["sources"] == []
+
+
+def test_evidence_is_exactly_what_the_model_was_given(monkeypatch):
+    model = RecordingModel("Toronto fails.")
+    use_fake_model(monkeypatch, model)
+
+    result = compose_answer("trade?", PASSED_RESULT, TRADE_DATA)
+
+    assert "$209,688,888" in result["evidence"]
+    assert "No Draft Rookie may be traded" in result["evidence"]
+    assert result["evidence"] in model.prompt
+
+
+def test_abstaining_without_calling_the_model_has_no_evidence():
+    assert compose_answer("anything")["evidence"] == ""
+
+
+def test_gemini_failure_has_no_evidence(monkeypatch):
+    use_fake_model(monkeypatch, BrokenModel())
+
+    assert compose_answer("trade?", None, TRADE_DATA)["evidence"] == ""
