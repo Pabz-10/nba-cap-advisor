@@ -45,4 +45,4 @@ When it asks, reply: `Jakob Poeltl for Dyson Daniels`
 ```
 
 ## Eval results to open
-`eval/results/dynamic_k8_all_20261111_150836.json`
+`eval/results/FINAL_dynamic_k8.json`
