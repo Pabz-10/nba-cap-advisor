@@ -198,7 +198,7 @@ def clarify_node(state):
 
 def revise_node(state):
     """Count the retry before going back to compose."""
-    # TODO: return revise_count + 1, and steps (add "revise")
+    # return revise_count + 1, and steps (add "revise")
     revise_count = state["revise_count"]
 
     return {
