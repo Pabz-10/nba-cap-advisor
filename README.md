@@ -10,20 +10,7 @@ The 2023 CBA is 676 pages, and every trade has to be checked against four salary
 
 ## How it works
 
-```mermaid
-flowchart TD
-    Q[Question] --> R[Router]
-    R -->|rules or trade| RA[Rules agent]
-    R -->|numbers or trade| DA[Data agent]
-    R -->|missing detail| C[Ask to clarify]
-    C -->|reply, max 2| R
-    RA --> CO[Composer]
-    DA --> CO
-    CO --> V[Verifier]
-    V -->|pass| A[Cited answer]
-    V -->|fail: revise once| CO
-    V -->|still fails| X[Refuse]
-```
+![How a question flows through the system](assets/architecture.png)
 
 | Part | Uses AI? | What it does |
 |---|---|---|
