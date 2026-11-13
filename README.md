@@ -4,6 +4,8 @@ A multi-agent AI assistant that answers NBA salary cap and trade questions with 
 
 Ask a question in plain English, like *"Can we trade Jakob Poeltl for Dyson Daniels?"*, and it returns the rule from the NBA's Collective Bargaining Agreement (CBA), the salary numbers for both teams, and a citation you can check. If it can't support an answer, it says so instead of guessing.
 
+📊 **[View the presentation slides (PDF)](assets/slides.pdf)**
+
 ## Why
 
 The 2023 CBA is 676 pages, and every trade has to be checked against four salary lines: the cap, the tax line and two aprons. Checking one trade by hand means finding the right rules, pulling both teams' salaries and doing the math. This advisor does all three in a few seconds and shows its sources.
