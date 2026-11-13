@@ -46,3 +46,9 @@ When it asks, reply: `Jakob Poeltl for Dyson Daniels`
 
 ## Eval results to open
 `eval/results/FINAL_dynamic_k8.json`
+
+
+## full eval
+```bash
+##.venv/bin/python -m eval.run_eval --top-k 5
+```
