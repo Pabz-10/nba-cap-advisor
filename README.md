@@ -11,18 +11,17 @@ The 2023 CBA is 676 pages, and every trade has to be checked against four salary
 ## How it works
 
 ```mermaid
-flowchart LR
+flowchart TD
     Q[Question] --> R[Router]
-    R -->|rules| RA[Rules agent]
-    R -->|numbers| DA[Data agent]
-    R -->|trade| RA & DA
+    R -->|rules or trade| RA[Rules agent]
+    R -->|numbers or trade| DA[Data agent]
     R -->|missing detail| C[Ask to clarify]
-    C -->|reply, max 2| Q
+    C -->|reply, max 2| R
     RA --> CO[Composer]
     DA --> CO
     CO --> V[Verifier]
     V -->|pass| A[Cited answer]
-    V -->|fail, revise once| CO
+    V -->|fail: revise once| CO
     V -->|still fails| X[Refuse]
 ```
 
@@ -135,7 +134,6 @@ src/
   main.py      command line interface
 eval/          questions, harness, saved results
 tests/         unit tests
-docs/          design doc
 ```
 
 ## Limitations
